@@ -239,37 +239,140 @@
   }
 
   .speedometer {
+    position: relative;
     display: grid;
-    width: 11rem;
+    width: 12rem;
     aspect-ratio: 1;
     place-items: center;
-    border: 10px solid oklch(1 0 0 / 0.08);
+    overflow: hidden;
+    border: 1px solid oklch(1 0 0 / 0.14);
     border-radius: 999px;
     background:
-      radial-gradient(circle at center, var(--asphalt) 0 46%, transparent 47%),
-      conic-gradient(
-        from 220deg,
-        var(--neon-cyan) 0 35%,
-        var(--racing-yellow) 35% 70%,
-        var(--racing-red) 70% 82%,
-        transparent 82% 100%
-      );
+      radial-gradient(circle at 50% 54%, oklch(0.08 0.018 255) 0 47%, transparent 48%),
+      radial-gradient(circle at 50% 50%, oklch(0.2 0.03 245) 0 61%, oklch(0.06 0.015 260) 62%);
     color: var(--racing-yellow);
     box-shadow:
-      inset 0 0 18px oklch(0 0 0 / 0.55),
-      0 0 28px oklch(0.82 0.14 205 / 0.22);
+      inset 0 0 22px oklch(0 0 0 / 0.75),
+      inset 0 0 0 10px oklch(1 0 0 / 0.045),
+      0 0 34px oklch(0.82 0.14 205 / 0.2),
+      0 18px 38px -22px oklch(0 0 0 / 0.85);
   }
 
-  .speedometer strong {
-    font-size: 2.6rem;
+  .speedometer::before {
+    position: absolute;
+    inset: 0.55rem;
+    border-radius: inherit;
+    content: "";
+    background: conic-gradient(
+      from 220deg,
+      var(--neon-cyan) 0deg 118deg,
+      var(--racing-yellow) 118deg 224deg,
+      var(--racing-red) 224deg 292deg,
+      transparent 292deg 360deg
+    );
+    mask: radial-gradient(
+      farthest-side,
+      transparent calc(100% - 1.35rem),
+      black calc(100% - 1.3rem)
+    );
+  }
+
+  .speedometer::after {
+    position: absolute;
+    inset: 0.55rem;
+    border-radius: inherit;
+    content: "";
+    background:
+      linear-gradient(145deg, oklch(1 0 0 / 0.22), transparent 38%),
+      radial-gradient(
+        circle at 50% 56%,
+        transparent 0 58%,
+        oklch(1 0 0 / 0.1) 59% 61%,
+        transparent 62%
+      );
+    pointer-events: none;
+  }
+
+  .speedometer-ring {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .speedometer-tick {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.15rem;
+    height: 0.7rem;
+    margin-left: -0.075rem;
+    margin-top: -0.35rem;
+    border-radius: 999px;
+    background: oklch(1 0 0 / 0.58);
+    transform-origin: center;
+  }
+
+  .speedometer-tick:nth-child(4n + 1) {
+    height: 1rem;
+    margin-top: -0.5rem;
+    background: oklch(1 0 0 / 0.9);
+  }
+
+  .speedometer-needle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4.4rem;
+    height: 0.24rem;
+    margin-top: -0.12rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--racing-red), var(--racing-yellow));
+    box-shadow: 0 0 16px oklch(0.62 0.23 25 / 0.55);
+    transform: rotate(-30deg);
+    transform-origin: left center;
+    transition: transform 220ms ease;
+  }
+
+  .speedometer--turbo .speedometer-needle {
+    transform: rotate(-4deg);
+  }
+
+  .speedometer-hub {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1.05rem;
+    aspect-ratio: 1;
+    border: 0.2rem solid oklch(1 0 0 / 0.8);
+    border-radius: 999px;
+    background: var(--racing-red);
+    box-shadow: 0 0 16px oklch(0.62 0.23 25 / 0.55);
+    transform: translate(-50%, -50%);
+  }
+
+  .speedometer-readout {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    padding-top: 2.9rem;
+    text-align: center;
+  }
+
+  .speedometer-readout strong {
+    font-size: 3rem;
+    font-weight: 950;
     line-height: 1;
+    text-shadow:
+      0 0 20px oklch(0.88 0.17 88 / 0.28),
+      0 2px 0 oklch(0 0 0 / 0.45);
   }
 
-  .speedometer span {
-    margin-top: -1.6rem;
+  .speedometer-readout span {
+    margin-top: 0.25rem;
     color: oklch(0.9 0.02 95);
-    font-size: 0.72rem;
-    font-weight: 800;
+    font-size: 0.68rem;
+    font-weight: 900;
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }

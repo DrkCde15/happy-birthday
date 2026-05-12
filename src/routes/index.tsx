@@ -5,7 +5,6 @@ import {
   ChevronRight,
   Flag,
   Fuel,
-  Gauge,
   MapPinned,
   Sparkles,
   Trophy,
@@ -34,9 +33,9 @@ export const Route = createFileRoute("/")({
 type Icon = ComponentType<{ className?: string }>;
 
 const cars = [
-  { src: car1, label: "Acelerando rumo a um novo ano!", spec: "" },
+  { src: car1, label: "Acelerando rumo a mais um ano!", spec: "" },
   { src: car2, label: "Brilhando como as luzes da cidade", spec: "" },
-  { src: car3, label: "Clássica, atemporal, inesquecível", spec: "" },
+  { src: car3, label: "Amorosa, especial, inesquecível", spec: "" },
   { src: car4, label: "Com estilo e velocidade total!", spec: "" },
 ];
 
@@ -49,12 +48,12 @@ const pitStops: Array<{ icon: Icon; title: string; text: string }> = [
   {
     icon: Wrench,
     title: "Pit stop caprichado",
-    text: "Carinho nos detalhes e uma pausa só para comemorar você.",
+    text: "Carinho nos detalhes e uma pausa só para comemorar.",
   },
   {
     icon: MapPinned,
     title: "Rota dos sonhos",
-    text: "Novos lugares, caminhos bonitos e liberdade no volante.",
+    text: "Novos lugares, caminhos bonitos e liberdade.",
   },
   {
     icon: Trophy,
@@ -147,10 +146,22 @@ function Index() {
             </div>
 
             <div className="mt-7 grid gap-6 sm:grid-cols-[0.85fr_1fr]">
-              <div className="speedometer mx-auto">
-                <Gauge className="h-10 w-10" />
-                <strong>{turboMode ? "300" : "220"}</strong>
-                <span>km/h de alegria</span>
+              <div className={`speedometer mx-auto ${turboMode ? "speedometer--turbo" : ""}`}>
+                <div className="speedometer-ring" aria-hidden="true">
+                  {Array.from({ length: 13 }).map((_, i) => (
+                    <span
+                      key={i}
+                      className="speedometer-tick"
+                      style={{ transform: `rotate(${-120 + i * 20}deg) translateY(-5rem)` }}
+                    />
+                  ))}
+                  <span className="speedometer-needle" />
+                  <span className="speedometer-hub" />
+                </div>
+                <div className="speedometer-readout">
+                  <strong>{turboMode ? "300" : "220"}</strong>
+                  <span>km/h de alegria</span>
+                </div>
               </div>
 
               <div className="grid content-center gap-3">
