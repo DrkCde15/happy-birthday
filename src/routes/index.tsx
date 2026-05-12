@@ -115,7 +115,7 @@ function Index() {
         >
           Feliz Aniversário,
           <br />
-          Aniversariante!
+          Clara!
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
           Mais um ano com o pé no acelerador. Que essa nova volta venha com pista livre, luz verde,
@@ -199,10 +199,6 @@ function Index() {
               A volta das máquinas
             </h2>
           </div>
-          <p className="max-w-sm text-sm leading-6 text-muted-foreground">
-            Cada foto entra como um carro na pista: luz, estilo, potência e uma boa dose de
-            comemoração.
-          </p>
         </div>
 
         <div
